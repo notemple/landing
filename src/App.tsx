@@ -6,6 +6,9 @@
 
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './components/ThemeContext';
+import { CursorProvider } from './components/cursor/CursorContext';
+import CustomCursor from './components/cursor/CustomCursor';
+import CursorTrail from './components/cursor/CursorTrail';
 import Layout from './components/Layout';
 
 // Direct page views imports
@@ -30,32 +33,36 @@ import Contact from './views/support/Contact';
 export default function App() {
   return (
     <ThemeProvider>
-      <HashRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/features" element={<Features />} />
-            <Route path="/pricing" element={<Pricing />} />
+      <CursorProvider>
+        <CustomCursor />
+        <CursorTrail />
+        <HashRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/features" element={<Features />} />
+              <Route path="/pricing" element={<Pricing />} />
 
-            {/* Legal */}
-            <Route path="/legal/terms" element={<Terms />} />
-            <Route path="/legal/privacy" element={<Privacy />} />
-            <Route path="/legal/security" element={<Security />} />
+              {/* Legal */}
+              <Route path="/legal/terms" element={<Terms />} />
+              <Route path="/legal/privacy" element={<Privacy />} />
+              <Route path="/legal/security" element={<Security />} />
 
-            {/* Company */}
-            <Route path="/company/about" element={<About />} />
-            <Route path="/company/blog" element={<Blog />} />
-            <Route path="/company/careers" element={<Careers />} />
+              {/* Company */}
+              <Route path="/company/about" element={<About />} />
+              <Route path="/company/blog" element={<Blog />} />
+              <Route path="/company/careers" element={<Careers />} />
 
-            {/* Support */}
-            <Route path="/support/help" element={<Help />} />
-            <Route path="/support/contact" element={<Contact />} />
+              {/* Support */}
+              <Route path="/support/help" element={<Help />} />
+              <Route path="/support/contact" element={<Contact />} />
 
-            {/* Fallback to index */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Layout>
-      </HashRouter>
+              {/* Fallback to index */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Layout>
+        </HashRouter>
+      </CursorProvider>
     </ThemeProvider>
   );
 }

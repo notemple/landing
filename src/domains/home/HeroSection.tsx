@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { useCursor } from '../../components/cursor/CursorContext';
 import {
   Target,
   CheckSquare,
@@ -22,6 +23,7 @@ import {
 } from '@phosphor-icons/react';
 
 export default function HeroSection() {
+  const { setCursor } = useCursor();
   return (
     <div className="w-full h-screen p-2 sm:p-3 md:p-4 overflow-hidden flex items-center justify-center bg-[#f4f5f6]">
       <div className="relative rounded overflow-hidden border border-zinc-200/80 shadow-md w-full h-full flex flex-col p-6 sm:p-15 select-none bg-transparent">
@@ -88,7 +90,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-[8%] left-[28%] md:left-[32%] flex items-center justify-center pointer-events-none"
+            className="absolute top-[8%] left-[28%] md:left-[32%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('target')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-amber-500/15 blur-xl" />
             <Target size={28} weight="regular" className="text-amber-600/65" />
@@ -106,7 +109,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-[10%] right-[15%] md:right-[20%] flex items-center justify-center pointer-events-none"
+            className="absolute top-[10%] right-[15%] md:right-[20%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('curve')}
           >
             <div className="absolute w-14 h-14 rounded-full bg-indigo-550/15 blur-xl" />
             <svg className="w-14 h-14 text-indigo-650/60" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.3">
@@ -128,7 +132,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-[22%] left-[45%] md:left-[48%] flex items-center justify-center pointer-events-none"
+            className="absolute top-[22%] left-[45%] md:left-[48%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('checksquare')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-blue-500/15 blur-xl" />
             <CheckSquare size={24} weight="regular" className="text-blue-600/65" />
@@ -146,7 +151,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-[38%] left-[8%] md:left-[12%] flex items-center justify-center pointer-events-none"
+            className="absolute top-[38%] left-[8%] md:left-[12%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('ecg')}
           >
             <div className="absolute w-14 h-14 rounded-full bg-emerald-500/15 blur-xl" />
             <svg className="w-10 h-10 text-emerald-600/65" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
@@ -166,7 +172,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-[40%] left-[28%] md:left-[35%] flex items-center justify-center pointer-events-none"
+            className="absolute top-[40%] left-[28%] md:left-[35%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('brain')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-purple-500/15 blur-xl" />
             <Brain size={24} weight="regular" className="text-purple-650/65" />
@@ -184,7 +191,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-[50%] right-[10%] md:right-[15%] flex items-center justify-center pointer-events-none"
+            className="absolute top-[50%] right-[10%] md:right-[15%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('clock')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-slate-500/15 blur-xl" />
             <Clock size={24} weight="regular" className="text-slate-700/65" />
@@ -202,7 +210,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute bottom-[35%] left-[46%] md:left-[49%] flex items-center justify-center pointer-events-none"
+            className="absolute bottom-[35%] left-[46%] md:left-[49%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('lightbulb')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-yellow-500/15 blur-xl" />
             <Lightbulb size={24} weight="regular" className="text-amber-600/70" />
@@ -220,7 +229,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute bottom-[12%] left-[8%] md:left-[10%] flex items-center justify-center pointer-events-none"
+            className="absolute bottom-[12%] left-[8%] md:left-[10%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('star')}
           >
             <div className="absolute w-14 h-14 rounded-full bg-teal-500/15 blur-xl" />
             <Star size={32} weight="regular" className="text-teal-600/65" />
@@ -238,7 +248,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute bottom-[6%] right-[6%] md:right-[8%] flex items-center justify-center pointer-events-none"
+            className="absolute bottom-[6%] right-[6%] md:right-[8%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('coffee')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-orange-550/15 blur-xl" />
             <Coffee size={24} weight="regular" className="text-orange-655/65" />
@@ -257,7 +268,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-[14%] left-[6%] md:left-[10%] flex items-center justify-center pointer-events-none"
+            className="absolute top-[14%] left-[6%] md:left-[10%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('sparkle')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-fuchsia-400/15 blur-xl" />
             <Sparkle size={24} weight="regular" className="text-fuchsia-600/65" />
@@ -275,7 +287,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-[25%] right-[6%] md:right-[10%] flex items-center justify-center pointer-events-none"
+            className="absolute top-[25%] right-[6%] md:right-[10%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('calendar')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-indigo-500/15 blur-xl" />
             <Calendar size={24} weight="regular" className="text-indigo-600/65" />
@@ -294,7 +307,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-[28%] left-[20%] md:left-[24%] flex items-center justify-center pointer-events-none"
+            className="absolute top-[28%] left-[20%] md:left-[24%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('heart')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-rose-400/15 blur-xl" />
             <Heart size={21} weight="regular" className="text-rose-600/65" />
@@ -312,7 +326,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-[30%] right-[25%] md:right-[30%] flex items-center justify-center pointer-events-none"
+            className="absolute top-[30%] right-[25%] md:right-[30%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('compass')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-cyan-400/15 blur-xl" />
             <Compass size={22} weight="regular" className="text-cyan-600/65" />
@@ -330,7 +345,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-[48%] left-[16%] md:left-[21%] flex items-center justify-center pointer-events-none"
+            className="absolute top-[48%] left-[16%] md:left-[21%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('hourglass')}
           >
             <div className="absolute w-11 h-11 rounded-full bg-amber-600/15 blur-xl" />
             <Hourglass size={20} weight="regular" className="text-amber-700/65" />
@@ -348,7 +364,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute bottom-[28%] right-[24%] md:right-[28%] flex items-center justify-center pointer-events-none"
+            className="absolute bottom-[28%] right-[24%] md:right-[28%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('paperplane')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-sky-400/15 blur-xl" />
             <PaperPlane size={21} weight="regular" className="text-sky-600/65" />
@@ -366,7 +383,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute bottom-[20%] left-[26%] md:left-[30%] flex items-center justify-center pointer-events-none"
+            className="absolute bottom-[20%] left-[26%] md:left-[30%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('sun')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-yellow-400/15 blur-xl" />
             <Sun size={23} weight="regular" className="text-yellow-600/65" />
@@ -384,7 +402,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute bottom-[22%] right-[8%] md:right-[12%] flex items-center justify-center pointer-events-none"
+            className="absolute bottom-[22%] right-[8%] md:right-[12%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('mappin')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-rose-500/15 blur-xl" />
             <MapPin size={23} weight="regular" className="text-rose-600/65" />
@@ -403,7 +422,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute bottom-[38%] right-[4%] md:right-[7%] flex items-center justify-center pointer-events-none"
+            className="absolute bottom-[38%] right-[4%] md:right-[7%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('flame')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-orange-500/15 blur-xl" />
             <Flame size={23} weight="regular" className="text-orange-600/65" />
@@ -421,7 +441,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute top-[55%] left-[4%] md:left-[7%] flex items-center justify-center pointer-events-none"
+            className="absolute top-[55%] left-[4%] md:left-[7%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('listchecks')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-indigo-400/15 blur-xl" />
             <ListChecks size={24} weight="regular" className="text-indigo-600/65" />
@@ -439,7 +460,8 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="absolute bottom-[12%] left-[20%] md:left-[24%] flex items-center justify-center pointer-events-none"
+            className="absolute bottom-[12%] left-[20%] md:left-[24%] flex items-center justify-center cursor-pointer hover:scale-125 transition-transform"
+            onClick={() => setCursor('flower')}
           >
             <div className="absolute w-12 h-12 rounded-full bg-emerald-400/15 blur-xl" />
             <Flower size={22} weight="regular" className="text-emerald-600/65" />
