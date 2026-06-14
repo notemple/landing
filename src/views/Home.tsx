@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import HeroSection from '../domains/home/HeroSection';
 import PlanSection from '../domains/home/PlanSection';
-import { Play, X, Star, Sparkle } from '@phosphor-icons/react';
+import { Play, X, Sparkle } from '@phosphor-icons/react';
 
 export default function Home() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
@@ -15,25 +15,6 @@ export default function Home() {
 
       {/* 2. Plan Section */}
       <PlanSection />
-
-      {/* 4. Mini Testimonial Quote strip */}
-      <section className="py-16 border-b border-zinc-200/50 dark:border-zinc-800/30 bg-zinc-100/30 dark:bg-zinc-950/20 text-center px-4">
-        <div className="max-w-4xl mx-auto space-y-4">
-          <div className="flex justify-center gap-1">
-            {[1, 2, 3, 4, 5].map((s) => (
-              <Star key={s} size={13} weight="fill" className="text-zinc-405 dark:text-zinc-650" />
-            ))}
-          </div>
-          <p className="font-sans italic text-lg sm:text-xl text-zinc-800 dark:text-zinc-250 leading-relaxed max-w-2xl mx-auto">
-            "templ completely restored my writing ritual. I no longer struggle with sidebars or nested visual clutter. It feels like typing on pristine thermal paper."
-          </p>
-          <div className="text-xs uppercase tracking-widest font-heading font-semibold text-zinc-450">
-            Marcus Sterling — Founder, Crafting Spaces
-          </div>
-        </div>
-      </section>
-
-
 
       {/* 6. Realistic Video Overlay Modal */}
       <AnimatePresence>

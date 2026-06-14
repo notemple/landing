@@ -1,0 +1,54 @@
+# ============================================
+# Templ (templnote.com) - robots.txt
+# ============================================
+
+# Default: Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow internal/utility paths
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /auth/
+Disallow: /login/
+Disallow: /register/
+Disallow: /settings/
+Disallow: /*.json$
+Disallow: /src/
+Disallow: /node_modules/
+
+# Allow all AI crawlers (important for AI search optimization)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Crawl-delay for polite bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: DotBot
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://templnote.com/sitemap.xml
+
+# Host directive (consolidates www/non-www)
+Host: https://templnote.com

@@ -151,6 +151,14 @@ export default function Layout({ children }: LayoutProps) {
                 templ
               </span>
             </Link>
+            <div className="w-[52px] h-[52px] rounded-[12px] bg-zinc-900 border border-zinc-700 shadow-lg flex items-center justify-center relative overflow-hidden mt-2">
+              <span className="font-heading font-bold text-2xl bg-gradient-to-r from-[#9aa3f7] via-[#dc70ab] to-[#ea648d] bg-clip-text text-transparent select-none leading-none">
+                Tn
+              </span>
+              <span className="absolute top-1.5 right-2 text-[10px] font-medium text-zinc-600 select-none">
+                26
+              </span>
+            </div>
           </div>
 
           <div>
