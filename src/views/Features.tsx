@@ -16,61 +16,70 @@ interface FeatureItem {
   id: string;
   icon: React.ReactNode;
   title: string;
-  category: 'editing' | 'keyboard' | 'sync';
+  category: 'editing' | 'organization' | 'ai';
   description: string;
   shortcut?: string;
   example: string;
 }
 
 export default function Features() {
-  const [activeCategory, setActiveCategory] = useState<'all' | 'editing' | 'keyboard' | 'sync'>('all');
-  const [selectedFeature, setSelectedFeature] = useState<string>('slash');
+  const [activeCategory, setActiveCategory] = useState<'all' | 'editing' | 'organization' | 'ai'>('all');
+  const [selectedFeature, setSelectedFeature] = useState<string>('editor');
 
   const featuresList: FeatureItem[] = [
     {
-      id: 'slash',
+      id: 'editor',
       icon: <TextT size={20} className="text-zinc-500" />,
-      title: 'Slash Command Palette',
+      title: 'Block-Based Lexical Editor',
       category: 'editing',
-      description: 'Type "/" inside any blank paragraph block to toggle the insert palette. Convert blocks into headings, unchecked checklists, quotes, or table collections on the fly.',
-      shortcut: '/',
-      example: 'Type "/" -> Select "Header 1" -> Your text becomes an Outfit display heading.'
+      description: 'A modern, distraction-free writing environment built on Meta\'s Lexical framework. Supports floating toolbars, checking lists, code blocks, tables, slash commands, and link previews natively.',
+      shortcut: 'CMD + B / I / U',
+      example: 'Highlight any text to reveal the inline formatting toolbar, or type standard markdown to create block types.'
     },
     {
-      id: 'kboard',
+      id: 'slash',
       icon: <Keyboard size={20} className="text-zinc-500" />,
-      title: 'Global Markdown Shortcuts',
-      category: 'keyboard',
-      description: 'Write raw markdown syntaxes natively. Standard hash characters (#), brackets ([]), or dashes (-) instantly transform the block representation without lifting hands off your keys.',
-      shortcut: 'Space after # / [ ]',
-      example: 'Type "# [Space] Meeting" to trigger h1, or "[] [Space] Pack luggage" to trigger task checklist.'
-    },
-    {
-      id: 'focus',
-      icon: <Browsers size={20} className="text-zinc-500" />,
-      title: 'Distraction-Free Focus Rails',
+      title: 'Slash Command & Markdown',
       category: 'editing',
-      description: 'Collapse all system sidebars, headers, and metadata trackers to enter standard writing state. Only the current text block glows slightly, leaving the remainder of the card in a neutral state.',
-      shortcut: 'CMD + \\',
-      example: 'Press CMD + \\ to hide sidebars and focus on the beautiful single-column page.'
+      description: 'Write at the speed of thought. Trigger the rich block menu via the "/" key to insert table grids, markdown checklists, blockquotes, and emojis without your fingers leaving the home row.',
+      shortcut: '/',
+      example: 'Type "/" inside an empty line -> Select "List / Checklist" or "Table" to dynamically inject elements.'
     },
     {
-      id: 'sync',
-      icon: <CloudArrowUp size={20} className="text-zinc-500" />,
-      title: 'Local Privacy & SQLite Cache',
-      category: 'sync',
-      description: 'Your notes belong entirely to you. templ mirrors all actions locally before cloud operations. Work offline flawlessly—updates synchronize automatically on server handshake.',
-      shortcut: 'Autosave',
-      example: 'Disconnect internet, keep typing, re-connect: pages resolve seamlessly.'
+      id: 'glance',
+      icon: <Browsers size={20} className="text-zinc-500" />,
+      title: '"At a Glance" Hub & Capture',
+      category: 'organization',
+      description: 'Your central productivity cockpit. Get a quick daily summary of your editing activity, recent files, focus timelines, outstanding checklist items, and a rapid scratchpad to dump fleeting ideas.',
+      shortcut: 'Hover Overlays',
+      example: 'Hover on the sidebar margins to slide open secondary control rails without leaving your active workspace.'
     },
     {
-      id: 'command',
+      id: 'collections',
+      icon: <BookOpen size={20} className="text-zinc-500" />,
+      title: 'Structured Collections Dashboard',
+      category: 'organization',
+      description: 'Go beyond loose pages. Organize your workspace using metadata-rich collection tables. Set custom tag labels, monitor workflow statuses, and link relevant items into structured records.',
+      shortcut: 'Grid view',
+      example: 'Create a new collection, assign custom tag categories, and sort documents based on urgency.'
+    },
+    {
+      id: 'ai',
       icon: <Sparkle size={20} className="text-zinc-500" />,
-      title: 'Command Menu Search',
-      category: 'keyboard',
-      description: 'Access any page, tag, task, or setting in the workspace with instant search caching.',
-      shortcut: 'CMD + K',
-      example: 'Type CMD + K -> Begin typing "weekly" -> Instantly jump to weekly grocery checklist.'
+      title: 'Context-Aware AI Assistant',
+      category: 'ai',
+      description: 'An embedded companion to speed up drafting and editing. Highlight sections to trigger custom rewrite actions, ask follow-up questions in the side panel, or run prompt operations on selected blocks.',
+      shortcut: 'AI Chat Panel',
+      example: 'Select paragraphs -> click "Ask AI" -> Ask to summarize or convert the text to structured action items.'
+    },
+    {
+      id: 'dailynotes',
+      icon: <CloudArrowUp size={20} className="text-zinc-500" />,
+      title: 'Timeline & Daily Notes',
+      category: 'organization',
+      description: 'Maintain a chronological log of daily goals, standups, and progress. The focus timeline tracks your workspace activity automatically, logging when documents were modified.',
+      shortcut: 'Daily Note Tab',
+      example: 'Open the Daily Notes tab to auto-generate today\'s clean canvas linked directly into your timeline history.'
     }
   ];
 
@@ -101,7 +110,7 @@ export default function Features() {
 
             {/* Tabs */}
             <div className="flex bg-zinc-200/50 p-1 rounded-md border border-zinc-300/60 w-fit">
-              {(['all', 'editing', 'keyboard', 'sync'] as const).map((tab) => (
+              {(['all', 'editing', 'organization', 'ai'] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveCategory(tab)}
