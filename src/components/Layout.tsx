@@ -2,7 +2,11 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  HardDrive
+  HardDrive,
+  DiscordLogo,
+  TwitterLogo,
+  RedditLogo,
+  InstagramLogo
 } from '@phosphor-icons/react';
 
 interface LayoutProps {
@@ -144,7 +148,7 @@ export default function Layout({ children }: LayoutProps) {
 
           <div className="col-span-2 md:col-span-1 space-y-4">
             <Link to="/" className="flex items-center gap-2">
-              <span className="font-heading font-bold text-xl bg-gradient-to-r from-[#9aa3f7] via-[#dc70ab] to-[#ea648d] bg-clip-text text-transparent tracking-tight select-none">
+              <span className="font-heading font-bold text-3xl bg-gradient-to-r from-[#9aa3f7] via-[#dc70ab] to-[#ea648d] bg-clip-text text-transparent tracking-tight select-none">
                 templ
               </span>
             </Link>
@@ -270,9 +274,19 @@ export default function Layout({ children }: LayoutProps) {
             <br />
             © 2026 Violetide. All rights reserved.
           </div>
-          <div className="flex items-center gap-1.5">
-            <HardDrive size={12} />
-            <span>Monochromatic Minimal Design</span>
+          <div className="flex items-center gap-3">
+            <a href="https://discord.gg/" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition-colors">
+              <DiscordLogo size={16} />
+            </a>
+            <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition-colors">
+              <TwitterLogo size={16} />
+            </a>
+            <a href="https://reddit.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition-colors">
+              <RedditLogo size={16} />
+            </a>
+            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition-colors">
+              <InstagramLogo size={16} />
+            </a>
           </div>
         </div>
       </footer>
