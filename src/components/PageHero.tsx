@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Link, useLocation } from 'react-router-dom';
 import {
   Target,
   CheckSquare,
@@ -35,17 +34,6 @@ export default function PageHero({
   actionButton,
   compact = false
 }: PageHeroProps) {
-  const location = useLocation();
-  const currentPath = location.pathname;
-
-  // Custom navbar-like page navigation links at the bottom of the hero
-  const navLinks = [
-    { name: 'Work', path: '/' },
-    { name: 'Features', path: '/features' },
-
-    { name: 'Pricing', path: '/pricing' }
-  ];
-
   return (
     <div className={`w-full ${compact ? 'py-16' : 'h-screen'} p-2 sm:p-3 md:p-4 overflow-hidden flex items-center justify-center bg-[#f4f5f6]`}>
       <div className={`relative rounded overflow-hidden border border-zinc-200/80 shadow-md w-full ${compact ? '' : 'h-full'} flex flex-col justify-between p-6 sm:p-15 select-none bg-transparent`}>
@@ -516,29 +504,6 @@ export default function PageHero({
           )}
 
         </div>
-
-        {/* BOTTOM ROW: Page navigation selectors highlighting active tab */}
-        {!compact && (
-        <div className="relative z-25 flex justify-center mt-3 sm:mt-5 select-none shrink-0">
-          <div className="bg-white/80 backdrop-blur-md border border-zinc-200/50 rounded p-1 inline-flex items-center gap-1 shadow-xs shadow-black/[0.01]">
-            {navLinks.map((link) => {
-              const isActive = currentPath === link.path;
-              return (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`px-4 sm:px-5 py-1.5 rounded text-[11px] sm:text-[12px] font-heading font-semibold transition-all whitespace-nowrap leading-relaxed ${isActive
-                      ? 'bg-zinc-950 text-white shadow-xs font-bold scale-[1.02]'
-                      : 'text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100/55'
-                    }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-        )}
 
       </div>
     </div>

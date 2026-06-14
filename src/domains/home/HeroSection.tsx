@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Target,
   CheckSquare,
@@ -22,16 +22,6 @@ import {
 } from '@phosphor-icons/react';
 
 export default function HeroSection() {
-  const location = useLocation();
-  const currentPath = location.pathname;
-
-  const navLinks = [
-    { name: 'Work', path: '/' },
-    { name: 'Features', path: '/features' },
-
-    { name: 'Pricing', path: '/pricing' }
-  ];
-
   return (
     <div className="w-full h-screen p-2 sm:p-3 md:p-4 overflow-hidden flex items-center justify-center bg-[#f4f5f6]">
       <div className="relative rounded overflow-hidden border border-zinc-200/80 shadow-md w-full h-full flex flex-col justify-between p-6 sm:p-15 select-none bg-transparent">
@@ -502,7 +492,7 @@ export default function HeroSection() {
         </div>
 
         {/* MAIN BODY: Centered Content from Screenshot */}
-        <div className="relative z-10 flex-grow flex flex-col items-center justify-center max-w-4xl mx-auto text-center px-4 sm:px-6 space-y-6 sm:space-y-8 my-auto">
+        <div className="relative z-10 flex-grow flex flex-col items-center justify-center max-w-4xl mx-auto text-center px-4 sm:px-6 space-y-6 sm:space-y-8 my-auto -mt-8">
 
           <div className="space-y-4">
             {/* Title / Heading */}
@@ -546,25 +536,16 @@ export default function HeroSection() {
 
         </div>
 
-        {/* BOTTOM ROW: Page navigation selectors highlighting active tab */}
-        <div className="relative z-25 flex justify-center mt-3 sm:mt-5 select-none shrink-0">
-          <div className="bg-white/80 backdrop-blur-md border border-zinc-200/50 rounded p-1 inline-flex items-center gap-1 shadow-xs shadow-black/[0.01]">
-            {navLinks.map((link) => {
-              const isActive = currentPath === link.path;
-              return (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`px-4 sm:px-5 py-1.5 rounded text-[11px] sm:text-[12px] font-heading font-semibold transition-all whitespace-nowrap leading-relaxed ${isActive
-                      ? 'bg-zinc-950 text-white shadow-xs font-bold scale-[1.02]'
-                      : 'text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100/55'
-                    }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </div>
+        {/* BOTTOM IMAGE: App Screenshot showing 3/4 with overflow hidden */}
+        <div className="absolute bottom-0 left-0 right-0 z-10 h-[55%] overflow-hidden pointer-events-none">
+          <motion.img
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            src="/src/assets/templ_homepage.png"
+            alt="templ app screenshot"
+            className="w-full h-[133.33%] object-cover object-top"
+          />
         </div>
 
       </div>
