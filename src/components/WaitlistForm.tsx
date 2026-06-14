@@ -1,7 +1,15 @@
+import { useRef, type FormEvent } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 
 export default function WaitlistForm() {
   const [state, handleSubmit] = useForm("xwvjaqkl");
+  const mountTime = useRef(Date.now());
+
+  function handleSafeSubmit(e: FormEvent<HTMLFormElement>) {
+    const elapsed = Date.now() - mountTime.current;
+    if (elapsed < 3000) return;
+    handleSubmit(e);
+  }
 
   if (state.succeeded) {
     return (
@@ -17,7 +25,22 @@ export default function WaitlistForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-full max-w-sm mx-auto">
+    <form onSubmit={handleSafeSubmit} className="flex flex-col gap-3 w-full max-w-sm mx-auto">
+      {/* Honeypot - hidden from humans, bots will fill it */}
+      <div
+        style={{ position: 'absolute', left: '-9999px' }}
+        aria-hidden="true"
+      >
+        <label htmlFor="website">Website</label>
+        <input
+          type="text"
+          id="website"
+          name="_gotcha"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div>
         <input
           id="name"
