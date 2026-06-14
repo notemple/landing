@@ -5,6 +5,7 @@
 
 
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { FormspreeProvider } from '@formspree/react';
 import { ThemeProvider } from './components/ThemeContext';
 import { CursorProvider } from './components/cursor/CursorContext';
 import CustomCursor from './components/cursor/CustomCursor';
@@ -32,6 +33,7 @@ import Contact from './views/support/Contact';
 
 export default function App() {
   return (
+    <FormspreeProvider>
     <ThemeProvider>
       <CursorProvider>
         <CustomCursor />
@@ -64,5 +66,6 @@ export default function App() {
         </HashRouter>
       </CursorProvider>
     </ThemeProvider>
+    </FormspreeProvider>
   );
 }

@@ -1,6 +1,8 @@
-import { motion } from 'motion/react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { useCursor } from '../../components/cursor/CursorContext';
+import WaitlistForm from '../../components/WaitlistForm';
 import {
   Target,
   CheckSquare,
@@ -24,7 +26,9 @@ import {
 
 export default function HeroSection() {
   const { setCursor } = useCursor();
+  const [showForm, setShowForm] = useState(false);
   return (
+    <>
     <div className="w-full h-screen p-2 sm:p-3 md:p-4 overflow-hidden flex items-center justify-center bg-[#f4f5f6]">
       <div className="relative rounded overflow-hidden border border-zinc-200/80 shadow-md w-full h-full flex flex-col p-6 sm:p-15 select-none bg-transparent">
 
@@ -541,9 +545,7 @@ export default function HeroSection() {
           {/* Action Buttons */}
           <div className="flex items-center justify-center w-full sm:w-auto mt-6">
             <button
-              onClick={() => {
-                document.getElementById('plan-section')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={() => setShowForm(true)}
               className="w-full sm:w-auto bg-zinc-950 hover:bg-zinc-850 text-white text-xs sm:text-[13px] font-heading font-semibold tracking-wide rounded-md px-7 py-3.5 sm:px-9 sm:py-4 transition-all text-center shadow-sm active:scale-98 cursor-pointer"
               id="hero-get-started"
             >
@@ -565,6 +567,54 @@ export default function HeroSection() {
       </div>
 
     </div>
+
+      {/* Waitlist Modal */}
+      <AnimatePresence>
+        {showForm && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+            onClick={() => setShowForm(false)}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-zinc-950/30 backdrop-blur-[2px]" />
+
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              className="relative bg-white rounded-xl shadow-xl border border-zinc-200 p-6 sm:p-8 w-full max-w-sm"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setShowForm(false)}
+                className="absolute top-3 right-3 text-zinc-400 hover:text-zinc-600 transition-colors cursor-pointer"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              <div className="mb-5">
+                <h3 className="font-heading font-semibold text-zinc-950 text-base sm:text-lg">
+                  Join the Waitlist
+                </h3>
+                <p className="font-heading text-zinc-500 text-xs sm:text-sm mt-1">
+                  Be the first to know when we launch.
+                </p>
+              </div>
+
+              <WaitlistForm />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
