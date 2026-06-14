@@ -38,7 +38,7 @@ export default function PlanSection() {
   const [activeTab, setActiveTab] = useState<'today' | 'upcoming' | 'all'>('all');
   const [tasks, setTasks] = useState<Task[]>([
     { id: '1', text: 'redesign the document banner', completed: false, tag: 'today' },
-    { id: '2', text: 'clean the car', completed: false, tag: 'upcoming' },
+    { id: '2', text: 'clean the car', completed: true, tag: 'upcoming' },
     { id: '3', text: 'ride 10km bicycle', completed: false, tag: 'upcoming' },
   ]);
   const [newTaskText, setNewTaskText] = useState('');
@@ -115,6 +115,9 @@ export default function PlanSection() {
           <h2 className="font-heading font-medium text-3xl sm:text-4xl text-zinc-900 leading-tight">
             A workspace built for focus
           </h2>
+          <svg className="w-full h-3 -mt-1" viewBox="0 0 300 12" fill="none" preserveAspectRatio="none">
+            <path d="M2 10 C75 2, 150 2, 298 10" stroke="#dc70ab" strokeWidth="3" strokeLinecap="round" />
+          </svg>
           <p className="font-sans text-base text-zinc-500 leading-relaxed">
             Write, plan, organize, and execute from a single workspace. Every note, task, database, and idea stays connected as your knowledge grows.
           </p>
@@ -134,6 +137,13 @@ export default function PlanSection() {
           {/* CARD 1: Collection (Static, exact match to screenshot with beautiful card wrapper) */}
           <div className="border border-zinc-100/80 bg-[#fafaf7] p-0 rounded shadow-[5px_5px_12px_rgba(160,165,175,0.14),-5px_-5px_12px_rgba(255,255,255,1)] select-none flex flex-col justify-between overflow-hidden h-[285px]">
             <div className="flex flex-col h-full overflow-hidden">
+              {/* Card Title */}
+              <div className="px-5 pt-5 mb-4 shrink-0">
+                <h3 className="font-heading font-semibold text-base text-zinc-500 tracking-wide">Collection</h3>
+                <svg className="w-16 h-2 mt-1" viewBox="0 0 60 8" fill="none">
+                  <path d="M2 6 C15 2, 30 2, 58 6" stroke="#9aa3f7" strokeWidth="2.5" strokeLinecap="round" />
+                </svg>
+              </div>
 
               {/* Tab Bar - Replicating screenshot layout exactly */}
               <div className="flex items-center gap-2 p-4 pb-0 mb-3 shrink-0">
@@ -245,42 +255,12 @@ export default function PlanSection() {
           </div>          {/* CARD 2: Tasks Checklist (Screenshot replication) */}
           <div className="border border-zinc-100/80 bg-[#fafaf7] p-5 rounded shadow-[5px_5px_12px_rgba(160,165,175,0.14),-5px_-5px_12px_rgba(255,255,255,1)] flex flex-col justify-between overflow-hidden h-[285px]">
             <div className="flex flex-col h-full overflow-hidden">
-              {/* Tab rows replica */}
-              <div className="flex items-center gap-1.5 mb-4 border-b border-zinc-100/50 pb-3 justify-between shrink-0">
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => setActiveTab('today')}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded border text-xs font-semibold select-none transition-all ${activeTab === 'today'
-                      ? 'bg-[#ffe8ed] text-zinc-600 border-[#ffccd7]/70 font-bold shadow-xs'
-                      : 'bg-white border-zinc-200/80 text-zinc-600 hover:bg-zinc-50'
-                      }`}
-                  >
-                    <Sun size={13} weight={activeTab === 'today' ? "bold" : "regular"} />
-                    <span>Today</span>
-                  </button>
-
-                  <button
-                    onClick={() => setActiveTab('upcoming')}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded border text-xs font-semibold select-none transition-all ${activeTab === 'upcoming'
-                      ? 'bg-[#ffe8ed] text-zinc-600 border-[#ffccd7]/70 font-bold shadow-xs'
-                      : 'bg-white border-zinc-200/80 text-zinc-600 hover:bg-zinc-50'
-                      }`}
-                  >
-                    <CalendarBlank size={13} weight={activeTab === 'upcoming' ? "bold" : "regular"} />
-                    <span>Upcoming</span>
-                  </button>
-
-                  <button
-                    onClick={() => setActiveTab('all')}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded border text-xs font-semibold select-none transition-all ${activeTab === 'all'
-                      ? 'bg-[#ffe8ed] text-zinc-600 border-[#ffccd7]/70 font-bold shadow-xs'
-                      : 'bg-white border-zinc-200/80 text-zinc-650 hover:bg-zinc-50'
-                      }`}
-                  >
-                    <Clipboard size={13} weight={activeTab === 'all' ? "bold" : "regular"} />
-                    <span>All Tasks</span>
-                  </button>
-                </div>
+              {/* Card Title */}
+              <div className="mb-4 shrink-0">
+                <h3 className="font-heading font-semibold text-base text-zinc-500 tracking-wide">Tasks</h3>
+                <svg className="w-16 h-2 mt-1" viewBox="0 0 60 8" fill="none">
+                  <path d="M2 6 C15 2, 30 2, 58 6" stroke="#dc70ab" strokeWidth="2.5" strokeLinecap="round" />
+                </svg>
               </div>
 
               {/* List area with overflow hidden */}
@@ -338,15 +318,6 @@ export default function PlanSection() {
                                   {task.text}
                                 </span>
                               </div>
-
-                              {/* Delete helper inline */}
-                              <button
-                                onClick={() => deleteTask(task.id)}
-                                className="text-zinc-400 hover:text-red-500 opacity-0 group-hover/card:opacity-100 p-1 transition-opacity cursor-pointer inline-flex items-center justify-center"
-                                title="Delete Task"
-                              >
-                                <Trash size={12} />
-                              </button>
                             </div>
                           </motion.div>
                         );
@@ -367,6 +338,13 @@ export default function PlanSection() {
           {/* CARD 3: Daily Gratitude (Matching Image exactly) */}
           <div className="border border-zinc-100/80 bg-[#fafaf7] p-6 pt-7 rounded shadow-[5px_5px_12px_rgba(160,165,175,0.14),-5px_-5px_12px_rgba(255,255,255,1)] flex flex-col justify-start h-[285px] overflow-hidden select-none pointer-events-none">
             <div className="flex flex-col h-full justify-start">
+              {/* Card Title */}
+              <div className="mb-4 shrink-0">
+                <h3 className="font-heading font-semibold text-base text-zinc-500 tracking-wide">Documents</h3>
+                <svg className="w-16 h-2 mt-1" viewBox="0 0 60 8" fill="none">
+                  <path d="M2 6 C15 2, 30 2, 58 6" stroke="#ea648d" strokeWidth="2.5" strokeLinecap="round" />
+                </svg>
+              </div>
 
               {/* Sunflower emoji/icon */}
               <div className="text-[32px] leading-none mb-1 select-none">🌻</div>
@@ -414,6 +392,13 @@ export default function PlanSection() {
           {/* CARD 4: Calendar (Matching Image 1 exactly) */}
           <div className="border border-zinc-100/80 bg-[#fafaf7] p-5 rounded shadow-[5px_5px_12px_rgba(160,165,175,0.14),-5px_-5px_12px_rgba(255,255,255,1)] flex flex-col justify-between h-[285px] overflow-hidden">
             <div className="flex flex-col h-full justify-between">
+              {/* Card Title */}
+              <div className="mb-4 shrink-0">
+                <h3 className="font-heading font-semibold text-base text-zinc-500 tracking-wide">Daily Planner</h3>
+                <svg className="w-16 h-2 mt-1" viewBox="0 0 60 8" fill="none">
+                  <path d="M2 6 C15 2, 30 2, 58 6" stroke="#a855f7" strokeWidth="2.5" strokeLinecap="round" />
+                </svg>
+              </div>
               <div>
                 {/* Saturday & Today pill */}
                 <div className="flex items-center gap-2 mb-1 shrink-0">
