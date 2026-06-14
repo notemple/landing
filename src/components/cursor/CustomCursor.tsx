@@ -92,8 +92,19 @@ export default function CustomCursor() {
   const { activeCursor, mousePosRef, cursorAngleRef } = useCursor();
   const [pos, setPos] = useState({ x: -100, y: -100 });
   const [angle, setAngle] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(pointer: coarse)');
+    setIsMobile(mediaQuery.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mediaQuery.addEventListener('change', listener);
+    return () => mediaQuery.removeEventListener('change', listener);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     let raf: number;
     const tick = () => {
       const p = mousePosRef.current;
@@ -103,7 +114,9 @@ export default function CustomCursor() {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [mousePosRef, cursorAngleRef]);
+  }, [mousePosRef, cursorAngleRef, isMobile]);
+
+  if (isMobile) return null;
 
   const baseRotation = getBaseRotation(activeCursor);
 

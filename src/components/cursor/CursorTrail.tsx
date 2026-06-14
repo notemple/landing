@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useCursor, type CursorType } from './CursorContext';
 
 interface Particle {
@@ -183,8 +183,19 @@ export default function CursorTrail() {
   const particlesRef = useRef<Particle[]>([]);
   const prevPosRef = useRef<{ x: number; y: number } | null>(null);
   const { activeCursor, mousePosRef, trailRef } = useCursor();
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(pointer: coarse)');
+    setIsMobile(mediaQuery.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mediaQuery.addEventListener('change', listener);
+    return () => mediaQuery.removeEventListener('change', listener);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -269,7 +280,9 @@ export default function CursorTrail() {
 
     raf = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(raf);
-  }, [activeCursor, mousePosRef, trailRef]);
+  }, [activeCursor, mousePosRef, trailRef, isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <canvas
