@@ -57,7 +57,6 @@ export function CursorProvider({ children }: { children: React.ReactNode }) {
   const angleRef = useRef(0);
   const [cursorAngle, setCursorAngle] = useState(0);
   const isMovingRef = useRef(false);
-  const lastMoveTimeRef = useRef(0);
 
   const setCursor = useCallback((id: CursorType) => {
     setActiveCursor(id);
@@ -87,17 +86,9 @@ export function CursorProvider({ children }: { children: React.ReactNode }) {
         if (angleRef.current > 180) angleRef.current -= 360;
         if (angleRef.current < -180) angleRef.current += 360;
         isMovingRef.current = true;
-        lastMoveTimeRef.current = performance.now();
       } else if (isMovingRef.current) {
-        // Decay angle back toward 0 after stopping
-        const timeSinceMove = performance.now() - lastMoveTimeRef.current;
-        if (timeSinceMove > 150) {
-          angleRef.current *= 0.94;
-          if (Math.abs(angleRef.current) < 0.3) {
-            angleRef.current = 0;
-            isMovingRef.current = false;
-          }
-        }
+        // Keep last angle — don't decay
+        isMovingRef.current = false;
       }
 
       prevPosRef.current = { x: pos.x, y: pos.y };
