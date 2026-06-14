@@ -24,7 +24,7 @@ import {
 export default function HeroSection() {
   return (
     <div className="w-full h-screen p-2 sm:p-3 md:p-4 overflow-hidden flex items-center justify-center bg-[#f4f5f6]">
-      <div className="relative rounded overflow-hidden border border-zinc-200/80 shadow-md w-full h-full flex flex-col justify-between p-6 sm:p-15 select-none bg-transparent">
+      <div className="relative rounded overflow-hidden border border-zinc-200/80 shadow-md w-full h-full flex flex-col p-6 sm:p-15 select-none bg-transparent">
 
         {/* Ambient Minimalist Frosted Glass Background Design */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -492,7 +492,7 @@ export default function HeroSection() {
         </div>
 
         {/* MAIN BODY: Centered Content from Screenshot */}
-        <div className="relative z-10 flex-grow flex flex-col items-center justify-center max-w-4xl mx-auto text-center px-4 sm:px-6 space-y-6 sm:space-y-8 my-auto -mt-8">
+        <div className="relative z-10 flex flex-col items-center justify-start pt-4 sm:pt-6 md:pt-8 max-w-4xl mx-auto text-center px-4 sm:px-6">
 
           <div className="space-y-4">
             {/* Title / Heading */}
@@ -521,7 +521,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex items-center justify-center w-full sm:w-auto"
+            className="flex items-center justify-center w-full sm:w-auto mt-6"
           >
             <button
               onClick={() => {
@@ -537,14 +537,14 @@ export default function HeroSection() {
         </div>
 
         {/* BOTTOM IMAGE: App Screenshot showing 3/4 with overflow hidden */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 h-[55%] overflow-hidden pointer-events-none">
+        <div className="absolute bottom-0 left-0 right-0 z-10 h-[35%] sm:h-[40%] md:h-[45%] px-12 sm:px-24 md:px-36 lg:px-48 overflow-hidden pointer-events-none">
           <motion.img
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
             src="/src/assets/templ_homepage.png"
             alt="templ app screenshot"
-            className="w-full h-[133.33%] object-cover object-top"
+            className="w-full h-[133.33%] object-cover object-top rounded-t-xl shadow-lg"
           />
         </div>
 
