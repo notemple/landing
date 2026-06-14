@@ -207,14 +207,14 @@ export default function Layout({ children }: LayoutProps) {
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <span className="text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                <Link to="/support/help" className="text-zinc-400 hover:text-white transition-colors">
                   Help Center
-                </span>
+                </Link>
               </li>
               <li>
-                <span className="text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                <Link to="/support/contact" className="text-zinc-400 hover:text-white transition-colors">
                   Contact Support
-                </span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -225,19 +225,19 @@ export default function Layout({ children }: LayoutProps) {
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <span className="text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                <Link to="/company/about" className="text-zinc-400 hover:text-white transition-colors">
                   About us
-                </span>
+                </Link>
               </li>
               <li>
-                <span className="text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                <Link to="/company/blog" className="text-zinc-400 hover:text-white transition-colors">
                   Blog
-                </span>
+                </Link>
               </li>
               <li>
-                <span className="text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                <Link to="/company/careers" className="text-zinc-400 hover:text-white transition-colors">
                   Careers
-                </span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -248,19 +248,19 @@ export default function Layout({ children }: LayoutProps) {
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <span className="text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                <Link to="/legal/terms" className="text-zinc-400 hover:text-white transition-colors">
                   Terms
-                </span>
+                </Link>
               </li>
               <li>
-                <span className="text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                <Link to="/legal/privacy" className="text-zinc-400 hover:text-white transition-colors">
                   Privacy Policy
-                </span>
+                </Link>
               </li>
               <li>
-                <span className="text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                <Link to="/legal/security" className="text-zinc-400 hover:text-white transition-colors">
                   Security
-                </span>
+                </Link>
               </li>
             </ul>
           </div>
