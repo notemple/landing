@@ -517,12 +517,7 @@ export default function HeroSection() {
           </div>
 
           {/* Action Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex items-center justify-center w-full sm:w-auto mt-6"
-          >
+          <div className="flex items-center justify-center w-full sm:w-auto mt-6">
             <button
               onClick={() => {
                 document.getElementById('plan-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -530,21 +525,18 @@ export default function HeroSection() {
               className="w-full sm:w-auto bg-zinc-950 hover:bg-zinc-850 text-white text-xs sm:text-[13px] font-heading font-semibold tracking-wide rounded-md px-7 py-3.5 sm:px-9 sm:py-4 transition-all text-center shadow-sm active:scale-98 cursor-pointer"
               id="hero-get-started"
             >
-              Get Started
+              Join Waitlist
             </button>
-          </motion.div>
+          </div>
 
         </div>
 
         {/* BOTTOM IMAGE: App Screenshot showing 3/4 with overflow hidden */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 h-[35%] sm:h-[40%] md:h-[45%] px-12 sm:px-24 md:px-36 lg:px-48 overflow-hidden pointer-events-none">
-          <motion.img
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
+        <div className="absolute bottom-0 left-0 right-0 z-10 h-[35%] sm:h-[40%] md:h-[45%] px-12 sm:px-24 md:px-36 lg:px-48 overflow-hidden pointer-events-none hidden sm:block">
+          <img
             src="/src/assets/templ_homepage.png"
             alt="templ app screenshot"
-            className="w-full h-[133.33%] object-cover object-top rounded-t-xl shadow-lg"
+            className="w-full h-[133.33%] object-cover object-top rounded-sm shadow-[0_8px_30px_rgb(0,0,0,0.12),0_2px_8px_rgb(0,0,0,0.08)]"
           />
         </div>
 
