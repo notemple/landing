@@ -4,8 +4,8 @@ export default function About() {
   return (
     <div className="space-y-12">
       <PageHero
+        compact
         title={<>About Us</>}
-        description="We're building a calmer, more intentional productivity tool for people who value focus."
       />
       <div className="pb-16 pt-4 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto space-y-8 text-left">
         <div className="space-y-4 font-sans text-sm text-zinc-600 leading-relaxed">

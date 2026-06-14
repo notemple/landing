@@ -24,14 +24,16 @@ import {
 
 interface PageHeroProps {
   title: React.ReactNode;
-  description: React.ReactNode;
+  description?: React.ReactNode;
   actionButton?: React.ReactNode;
+  compact?: boolean;
 }
 
 export default function PageHero({
   title,
   description,
-  actionButton
+  actionButton,
+  compact = false
 }: PageHeroProps) {
   const location = useLocation();
   const currentPath = location.pathname;
@@ -45,8 +47,8 @@ export default function PageHero({
   ];
 
   return (
-    <div className="w-full h-screen p-2 sm:p-3 md:p-4 overflow-hidden flex items-center justify-center bg-[#f4f5f6]">
-      <div className="relative rounded overflow-hidden border border-zinc-200/80 shadow-md w-full h-full flex flex-col justify-between p-6 sm:p-15 select-none bg-transparent">
+    <div className={`w-full ${compact ? 'py-16' : 'h-screen'} p-2 sm:p-3 md:p-4 overflow-hidden flex items-center justify-center bg-[#f4f5f6]`}>
+      <div className={`relative rounded overflow-hidden border border-zinc-200/80 shadow-md w-full ${compact ? '' : 'h-full'} flex flex-col justify-between p-6 sm:p-15 select-none bg-transparent`}>
 
         {/* Ambient Minimalist Frosted Glass Background Design */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -472,10 +474,10 @@ export default function PageHero({
         </div>
 
         {/* TOP ROW Invisible spacer */}
-        <div className="h-14 sm:h-16" />
+        {!compact && <div className="h-14 sm:h-16" />}
 
         {/* MAIN BODY: Centered Content */}
-        <div className="relative z-10 flex-grow flex flex-col items-center justify-center max-w-4xl mx-auto text-center px-4 sm:px-6 space-y-6 sm:space-y-8 my-auto">
+        <div className={`relative z-10 flex-grow flex flex-col items-center justify-center max-w-4xl mx-auto text-center px-4 sm:px-6 space-y-6 sm:space-y-8 ${compact ? 'py-4' : 'my-auto'}`}>
 
           <div className="space-y-4">
             {/* Title / Heading */}
@@ -483,20 +485,22 @@ export default function PageHero({
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="font-sans font-semibold text-4xl sm:text-6xl md:text-7xl lg:text-[76px] tracking-tight text-zinc-950 leading-[1.1] sm:leading-[1.08] max-w-3xl mx-auto"
+              className={`font-sans font-semibold tracking-tight text-zinc-950 leading-[1.1] sm:leading-[1.08] max-w-3xl mx-auto ${compact ? 'text-3xl sm:text-4xl' : 'text-4xl sm:text-6xl md:text-7xl lg:text-[76px]'}`}
             >
               {title}
             </motion.h1>
 
             {/* Description Paragraph */}
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.15 }}
-              className="font-heading font-light text-zinc-500 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
-            >
-              {description}
-            </motion.p>
+            {description && (
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.15 }}
+                className="font-heading font-light text-zinc-500 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+              >
+                {description}
+              </motion.p>
+            )}
           </div>
 
           {/* Render Action button if provided */}
@@ -514,6 +518,7 @@ export default function PageHero({
         </div>
 
         {/* BOTTOM ROW: Page navigation selectors highlighting active tab */}
+        {!compact && (
         <div className="relative z-25 flex justify-center mt-3 sm:mt-5 select-none shrink-0">
           <div className="bg-white/80 backdrop-blur-md border border-zinc-200/50 rounded p-1 inline-flex items-center gap-1 shadow-xs shadow-black/[0.01]">
             {navLinks.map((link) => {
@@ -533,6 +538,7 @@ export default function PageHero({
             })}
           </div>
         </div>
+        )}
 
       </div>
     </div>

@@ -4,8 +4,8 @@ export default function Blog() {
   return (
     <div className="space-y-12">
       <PageHero
+        compact
         title={<>Blog</>}
-        description="Thoughts on productivity, design, and building calmer software."
       />
       <div className="pb-16 pt-4 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto space-y-8 text-left">
         <div className="space-y-6">

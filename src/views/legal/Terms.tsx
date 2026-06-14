@@ -4,8 +4,8 @@ export default function Terms() {
   return (
     <div className="space-y-12">
       <PageHero
+        compact
         title={<>Terms of Service</>}
-        description="Please read these terms carefully before using templnote."
       />
       <div className="pb-16 pt-4 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto space-y-8 text-left">
         <div className="space-y-4 font-sans text-sm text-zinc-600 leading-relaxed">
