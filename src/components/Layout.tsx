@@ -143,7 +143,7 @@ export default function Layout({ children }: LayoutProps) {
       </main>
 
       {/* Premium Monochromatic Footer */}
-      <footer className="mx-2 sm:mx-3 md:mx-4 mt-12 sm:mt-16 md:mt-20 mb-2 sm:mb-3 md:mb-4 relative rounded overflow-hidden border border-zinc-800 shadow-xl bg-gradient-to-br from-zinc-900 to-black py-14 px-6 sm:px-10 md:px-12 select-none">
+      <footer className="mx-2 sm:mx-3 md:mx-4 mt-12 sm:mt-16 md:mt-20 mb-2 sm:mb-3 md:mb-4 relative rounded overflow-hidden border border-zinc-700 shadow-xl bg-gradient-to-b from-zinc-800 via-zinc-900 to-zinc-950 py-14 px-6 sm:px-10 md:px-12 select-none">
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-6 gap-8">
 
           <div className="col-span-2 md:col-span-1 space-y-4">
