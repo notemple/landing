@@ -40,7 +40,7 @@ export default function PageHero({
   const navLinks = [
     { name: 'Work', path: '/' },
     { name: 'Features', path: '/features' },
-    { name: 'Templates', path: '/templates' },
+
     { name: 'Pricing', path: '/pricing' }
   ];
 

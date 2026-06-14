@@ -113,10 +113,10 @@ export default function PlanSection() {
             PLAN
           </span>
           <h2 className="font-heading font-medium text-3xl sm:text-4xl text-zinc-900 leading-tight">
-            Planning that doesn't feel like work.
+            A workspace built for focus
           </h2>
           <p className="font-sans text-base text-zinc-500 leading-relaxed">
-            Keep your ideas and tasks together where they belong. templ embeds real, task checklists directly within your nested pages, keeping your best thinking connected to what needs to get done. No clunky external tabs or dashboard context switching.
+            Write, plan, organize, and execute from a single workspace. Every note, task, database, and idea stays connected as your knowledge grows.
           </p>
           <div className="pt-2">
             <Link
@@ -251,7 +251,7 @@ export default function PlanSection() {
                   <button
                     onClick={() => setActiveTab('today')}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded border text-xs font-semibold select-none transition-all ${activeTab === 'today'
-                      ? 'bg-[#ded5fc] text-purple-950 border-purple-200/60 font-bold shadow-xs'
+                      ? 'bg-[#ffe8ed] text-zinc-600 border-[#ffccd7]/70 font-bold shadow-xs'
                       : 'bg-white border-zinc-200/80 text-zinc-600 hover:bg-zinc-50'
                       }`}
                   >
@@ -262,7 +262,7 @@ export default function PlanSection() {
                   <button
                     onClick={() => setActiveTab('upcoming')}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded border text-xs font-semibold select-none transition-all ${activeTab === 'upcoming'
-                      ? 'bg-[#ded5fc] text-purple-950 border-purple-200/60 font-bold shadow-xs'
+                      ? 'bg-[#ffe8ed] text-zinc-600 border-[#ffccd7]/70 font-bold shadow-xs'
                       : 'bg-white border-zinc-200/80 text-zinc-600 hover:bg-zinc-50'
                       }`}
                   >
@@ -273,7 +273,7 @@ export default function PlanSection() {
                   <button
                     onClick={() => setActiveTab('all')}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded border text-xs font-semibold select-none transition-all ${activeTab === 'all'
-                      ? 'bg-[#ded5fc] text-purple-950 border-purple-200/60 font-bold shadow-xs'
+                      ? 'bg-[#ffe8ed] text-zinc-600 border-[#ffccd7]/70 font-bold shadow-xs'
                       : 'bg-white border-zinc-200/80 text-zinc-650 hover:bg-zinc-50'
                       }`}
                   >

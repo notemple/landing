@@ -29,7 +29,7 @@ export default function HeroSection() {
   const navLinks = [
     { name: 'Work', path: '/' },
     { name: 'Features', path: '/features' },
-    { name: 'Templates', path: '/templates' },
+
     { name: 'Pricing', path: '/pricing' }
   ];
 
@@ -487,12 +487,7 @@ export default function HeroSection() {
               >
                 Features
               </Link>
-              <Link
-                to="/templates"
-                className="text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 px-2.5 sm:px-4 py-1.5 rounded text-[10.5px] sm:text-[11.5px] font-heading font-medium transition-all whitespace-nowrap"
-              >
-                Templates
-              </Link>
+
               <Link
                 to="/pricing"
                 className="text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 px-2.5 sm:px-4 py-1.5 rounded text-[10.5px] sm:text-[11.5px] font-heading font-medium transition-all whitespace-nowrap"

@@ -25,7 +25,7 @@ export default function Layout({ children }: LayoutProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isIntegratedPage = ['/', '/features', '/templates', '/pricing'].includes(location.pathname);
+  const isIntegratedPage = ['/', '/features', '/pricing'].includes(location.pathname);
   const isAtTop = scrollY < 40;
 
   // Compute dynamic transition categories
@@ -89,8 +89,8 @@ export default function Layout({ children }: LayoutProps) {
               <Link
                 to="/"
                 className={`px-3 sm:px-4 py-1.5 rounded text-[10.5px] sm:text-[11.5px] font-heading font-semibold transition-all whitespace-nowrap ${location.pathname === '/'
-                    ? 'bg-zinc-950 text-white shadow-xs'
-                    : 'text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100/65'
+                  ? 'bg-zinc-950 text-white shadow-xs'
+                  : 'text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100/65'
                   }`}
               >
                 Work
@@ -98,26 +98,18 @@ export default function Layout({ children }: LayoutProps) {
               <Link
                 to="/features"
                 className={`px-3 sm:px-4 py-1.5 rounded text-[10.5px] sm:text-[11.5px] font-heading font-semibold transition-all whitespace-nowrap ${location.pathname === '/features'
-                    ? 'bg-zinc-950 text-white shadow-xs'
-                    : 'text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100/65'
+                  ? 'bg-zinc-950 text-white shadow-xs'
+                  : 'text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100/65'
                   }`}
               >
                 Features
               </Link>
-              <Link
-                to="/templates"
-                className={`px-3 sm:px-4 py-1.5 rounded text-[10.5px] sm:text-[11.5px] font-heading font-semibold transition-all whitespace-nowrap ${location.pathname === '/templates'
-                    ? 'bg-zinc-950 text-white shadow-xs'
-                    : 'text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100/65'
-                  }`}
-              >
-                Templates
-              </Link>
+
               <Link
                 to="/pricing"
                 className={`px-3 sm:px-4 py-1.5 rounded text-[10.5px] sm:text-[11.5px] font-heading font-semibold transition-all whitespace-nowrap ${location.pathname === '/pricing'
-                    ? 'bg-zinc-950 text-white shadow-xs'
-                    : 'text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100/65'
+                  ? 'bg-zinc-950 text-white shadow-xs'
+                  : 'text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100/65'
                   }`}
               >
                 Pricing
@@ -150,7 +142,7 @@ export default function Layout({ children }: LayoutProps) {
 
       {/* Premium Monochromatic Footer */}
       <footer className="mx-2 sm:mx-3 md:mx-4 mt-12 sm:mt-16 md:mt-20 mb-2 sm:mb-3 md:mb-4 relative rounded overflow-hidden border border-zinc-800 shadow-xl bg-gradient-to-br from-zinc-900 to-black py-14 px-6 sm:px-10 md:px-12 select-none">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-6 gap-8">
 
           <div className="col-span-2 md:col-span-1 space-y-4">
             <Link to="/" className="flex items-center gap-2">
@@ -175,11 +167,7 @@ export default function Layout({ children }: LayoutProps) {
                   Features List
                 </Link>
               </li>
-              <li>
-                <Link to="/templates" className="text-zinc-400 hover:text-white transition-colors">
-                  Templates Shelf
-                </Link>
-              </li>
+
               <li>
                 <Link to="/pricing" className="text-zinc-400 hover:text-white transition-colors">
                   Product Pricing
@@ -252,12 +240,37 @@ export default function Layout({ children }: LayoutProps) {
             </ul>
           </div>
 
+          <div>
+            <h4 className="font-heading font-medium text-xs text-white tracking-wider pb-2 border-b border-zinc-800 mb-4 uppercase">
+              Legal
+            </h4>
+            <ul className="space-y-2 text-xs">
+              <li>
+                <span className="text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                  Terms
+                </span>
+              </li>
+              <li>
+                <span className="text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                  Privacy Policy
+                </span>
+              </li>
+              <li>
+                <span className="text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                  Security
+                </span>
+              </li>
+            </ul>
+          </div>
+
         </div>
 
         {/* Bottom copyright line */}
         <div className="max-w-6xl mx-auto mt-12 pt-8 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-zinc-400">
           <div>
-            &copy; {new Date().getFullYear()} templ Labs Inc. All rights reserved. Registered trademark of templ.
+            templnote™
+            <br />
+            © 2026 Violetide. All rights reserved.
           </div>
           <div className="flex items-center gap-1.5">
             <HardDrive size={12} />
