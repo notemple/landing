@@ -77,13 +77,13 @@ export function CursorProvider({ children }: { children: React.ReactNode }) {
       const dy = pos.y - prevPosRef.current.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (dist > 0.5) {
+      if (dist > 2) {
         const targetAngle = Math.atan2(dy, dx) * (180 / Math.PI);
         // Lerp toward target, handling wrap-around
         let diff = targetAngle - angleRef.current;
         if (diff > 180) diff -= 360;
         if (diff < -180) diff += 360;
-        angleRef.current += diff * 0.18;
+        angleRef.current += diff * 0.08;
         if (angleRef.current > 180) angleRef.current -= 360;
         if (angleRef.current < -180) angleRef.current += 360;
         isMovingRef.current = true;
@@ -91,8 +91,8 @@ export function CursorProvider({ children }: { children: React.ReactNode }) {
       } else if (isMovingRef.current) {
         // Decay angle back toward 0 after stopping
         const timeSinceMove = performance.now() - lastMoveTimeRef.current;
-        if (timeSinceMove > 80) {
-          angleRef.current *= 0.92;
+        if (timeSinceMove > 150) {
+          angleRef.current *= 0.94;
           if (Math.abs(angleRef.current) < 0.3) {
             angleRef.current = 0;
             isMovingRef.current = false;

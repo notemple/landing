@@ -79,14 +79,23 @@ function CursorIcon({ type }: { type: CursorType }) {
   }
 }
 
+function getBaseRotation(type: CursorType): number {
+  switch (type) {
+    case 'paperplane': return 90;
+    case 'mappin': return 90;
+    default: return 0;
+  }
+}
+
 export default function CustomCursor() {
   const { activeCursor, mousePos, cursorAngle } = useCursor();
+  const baseRotation = getBaseRotation(activeCursor);
 
   return (
     <div
       className="fixed top-0 left-0 z-[9999] pointer-events-none"
       style={{
-        transform: `translate(${mousePos.x}px, ${mousePos.y}px) translate(-50%, -50%) rotate(${cursorAngle}deg)`,
+        transform: `translate(${mousePos.x}px, ${mousePos.y}px) translate(-50%, -50%) rotate(${cursorAngle + baseRotation}deg)`,
         willChange: 'transform'
       }}
     >
