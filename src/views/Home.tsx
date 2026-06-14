@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import HeroSection from '../features/home/HeroSection';
-import PlanSection from '../features/home/PlanSection';
+import HeroSection from '../domains/home/HeroSection';
+import PlanSection from '../domains/home/PlanSection';
 import { Play, X, Star, Sparkle } from '@phosphor-icons/react';
 
 export default function Home() {
