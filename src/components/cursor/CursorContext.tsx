@@ -31,9 +31,9 @@ export interface TrailPoint {
 interface CursorContextValue {
   activeCursor: CursorType;
   setCursor: (id: CursorType) => void;
-  mousePos: { x: number; y: number };
-  trail: TrailPoint[];
-  cursorAngle: number;
+  mousePosRef: React.MutableRefObject<{ x: number; y: number }>;
+  trailRef: React.MutableRefObject<TrailPoint[]>;
+  cursorAngleRef: React.MutableRefObject<number>;
 }
 
 const CursorContext = createContext<CursorContextValue | null>(null);
@@ -48,14 +48,11 @@ const TRAIL_LENGTH = 20;
 
 export function CursorProvider({ children }: { children: React.ReactNode }) {
   const [activeCursor, setActiveCursor] = useState<CursorType>('paperplane');
-  const mousePos = useRef({ x: -100, y: -100 });
-  const [mouseState, setMouseState] = useState({ x: -100, y: -100 });
+  const mousePosRef = useRef({ x: -100, y: -100 });
   const trailRef = useRef<TrailPoint[]>([]);
-  const [trail, setTrail] = useState<TrailPoint[]>([]);
+  const cursorAngleRef = useRef(0);
   const rafRef = useRef<number>(0);
   const prevPosRef = useRef({ x: -100, y: -100 });
-  const angleRef = useRef(0);
-  const [cursorAngle, setCursorAngle] = useState(0);
   const isMovingRef = useRef(false);
 
   const setCursor = useCallback((id: CursorType) => {
@@ -64,12 +61,11 @@ export function CursorProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      mousePos.current = { x: e.clientX, y: e.clientY };
+      mousePosRef.current = { x: e.clientX, y: e.clientY };
     };
 
     const tick = () => {
-      const pos = mousePos.current;
-      setMouseState({ x: pos.x, y: pos.y });
+      const pos = mousePosRef.current;
 
       // Compute movement direction angle
       const dx = pos.x - prevPosRef.current.x;
@@ -78,28 +74,25 @@ export function CursorProvider({ children }: { children: React.ReactNode }) {
 
       if (dist > 2) {
         const targetAngle = Math.atan2(dy, dx) * (180 / Math.PI);
-        // Lerp toward target, handling wrap-around
-        let diff = targetAngle - angleRef.current;
+        let diff = targetAngle - cursorAngleRef.current;
         if (diff > 180) diff -= 360;
         if (diff < -180) diff += 360;
-        angleRef.current += diff * 0.08;
-        if (angleRef.current > 180) angleRef.current -= 360;
-        if (angleRef.current < -180) angleRef.current += 360;
+        cursorAngleRef.current += diff * 0.08;
+        if (cursorAngleRef.current > 180) cursorAngleRef.current -= 360;
+        if (cursorAngleRef.current < -180) cursorAngleRef.current += 360;
         isMovingRef.current = true;
       } else if (isMovingRef.current) {
-        // Keep last angle — don't decay
         isMovingRef.current = false;
       }
 
       prevPosRef.current = { x: pos.x, y: pos.y };
-      setCursorAngle(angleRef.current);
 
+      // Update trail
       const now = performance.now();
       trailRef.current.push({ x: pos.x, y: pos.y, t: now });
       if (trailRef.current.length > TRAIL_LENGTH) {
         trailRef.current = trailRef.current.slice(-TRAIL_LENGTH);
       }
-      setTrail([...trailRef.current]);
 
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -114,7 +107,7 @@ export function CursorProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <CursorContext.Provider value={{ activeCursor, setCursor, mousePos: mouseState, trail, cursorAngle }}>
+    <CursorContext.Provider value={{ activeCursor, setCursor, mousePosRef, trailRef, cursorAngleRef }}>
       {children}
     </CursorContext.Provider>
   );

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect } from 'react';
 import { useCursor, type CursorType } from './CursorContext';
 
 interface Particle {
@@ -182,92 +182,94 @@ export default function CursorTrail() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const prevPosRef = useRef<{ x: number; y: number } | null>(null);
-  const { activeCursor, mousePos, trail } = useCursor();
+  const { activeCursor, mousePosRef, trailRef } = useCursor();
 
-  const animate = useCallback(() => {
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let raf: number;
 
-    const now = performance.now();
-    const cursor = activeCursor;
+    const animate = () => {
+      const mousePos = mousePosRef.current;
+      const trail = trailRef.current;
 
-    // Draw the trail line for paperplane (default)
-    if (cursor === 'paperplane' && trail.length > 2) {
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(56,189,248,0.35)';
-      ctx.lineWidth = 2;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.moveTo(trail[0].x, trail[0].y);
-      for (let i = 1; i < trail.length; i++) {
-        const p = trail[i];
-        const age = (now - p.t) / 400;
-        const alpha = Math.max(0, 1 - age);
-        ctx.globalAlpha = alpha * 0.6;
-        ctx.lineTo(p.x, p.y);
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const now = performance.now();
+
+      // Draw the trail line for paperplane (default)
+      if (activeCursor === 'paperplane' && trail.length > 2) {
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(56,189,248,0.35)';
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.moveTo(trail[0].x, trail[0].y);
+        for (let i = 1; i < trail.length; i++) {
+          const p = trail[i];
+          const age = (now - p.t) / 400;
+          const alpha = Math.max(0, 1 - age);
+          ctx.globalAlpha = alpha * 0.6;
+          ctx.lineTo(p.x, p.y);
+        }
+        ctx.stroke();
+        ctx.globalAlpha = 1;
       }
-      ctx.stroke();
-      ctx.globalAlpha = 1;
-    }
 
-    // Spawn particles based on cursor type
-    if (mousePos.x > 0 && mousePos.y > 0) {
-      const prev = prevPosRef.current;
-      const dx = prev ? mousePos.x - prev.x : 0;
-      const dy = prev ? mousePos.y - prev.y : 0;
-      const dist = Math.sqrt(dx * dx + dy * dy);
+      // Spawn particles based on cursor type
+      if (mousePos.x > 0 && mousePos.y > 0) {
+        const prev = prevPosRef.current;
+        const dx = prev ? mousePos.x - prev.x : 0;
+        const dy = prev ? mousePos.y - prev.y : 0;
+        const dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (dist > 3) {
-        const spawnCount = cursor === 'paperplane' ? 0 :
-          cursor === 'flame' ? 3 :
-          cursor === 'sparkle' ? 2 :
-          cursor === 'flower' ? 2 : 1;
+        if (dist > 3) {
+          const spawnCount = activeCursor === 'paperplane' ? 0 :
+            activeCursor === 'flame' ? 3 :
+            activeCursor === 'sparkle' ? 2 :
+            activeCursor === 'flower' ? 2 : 1;
 
-        for (let i = 0; i < spawnCount; i++) {
-          particlesRef.current.push(spawnParticle(mousePos.x, mousePos.y, cursor));
+          for (let i = 0; i < spawnCount; i++) {
+            particlesRef.current.push(spawnParticle(mousePos.x, mousePos.y, activeCursor));
+          }
         }
       }
-    }
 
-    prevPosRef.current = { x: mousePos.x, y: mousePos.y };
+      prevPosRef.current = { x: mousePos.x, y: mousePos.y };
 
-    // Update and draw particles
-    const dt = 0.016;
-    particlesRef.current = particlesRef.current.filter(p => {
-      p.life -= dt / p.maxLife;
-      if (p.life <= 0) return false;
+      // Update and draw particles
+      const dt = 0.016;
+      particlesRef.current = particlesRef.current.filter(p => {
+        p.life -= dt / p.maxLife;
+        if (p.life <= 0) return false;
 
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.rotation !== undefined && p.rotationSpeed) p.rotation += p.rotationSpeed;
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.rotation !== undefined && p.rotationSpeed) p.rotation += p.rotationSpeed;
 
-      // Gravity-like effect for certain shapes
-      if (p.shape === 'drop' || p.shape === 'heart') {
-        p.vy += 0.02;
-      }
-      // Float upward for fire/steam
-      if (cursor === 'flame' || cursor === 'coffee') {
-        p.vy -= 0.03;
-        p.vx *= 0.98;
-      }
+        if (p.shape === 'drop' || p.shape === 'heart') {
+          p.vy += 0.02;
+        }
+        if (activeCursor === 'flame' || activeCursor === 'coffee') {
+          p.vy -= 0.03;
+          p.vx *= 0.98;
+        }
 
-      drawParticle(ctx, p);
-      return true;
-    });
+        drawParticle(ctx, p);
+        return true;
+      });
 
-    requestAnimationFrame(animate);
-  }, [activeCursor, mousePos, trail]);
+      raf = requestAnimationFrame(animate);
+    };
 
-  useEffect(() => {
-    const raf = requestAnimationFrame(animate);
+    raf = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(raf);
-  }, [animate]);
+  }, [activeCursor, mousePosRef, trailRef]);
 
   return (
     <canvas

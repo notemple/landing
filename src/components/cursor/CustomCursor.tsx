@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useCursor, type CursorType } from './CursorContext';
 import {
   Target,
@@ -88,14 +89,29 @@ function getBaseRotation(type: CursorType): number {
 }
 
 export default function CustomCursor() {
-  const { activeCursor, mousePos, cursorAngle } = useCursor();
+  const { activeCursor, mousePosRef, cursorAngleRef } = useCursor();
+  const [pos, setPos] = useState({ x: -100, y: -100 });
+  const [angle, setAngle] = useState(0);
+
+  useEffect(() => {
+    let raf: number;
+    const tick = () => {
+      const p = mousePosRef.current;
+      setPos({ x: p.x, y: p.y });
+      setAngle(cursorAngleRef.current);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [mousePosRef, cursorAngleRef]);
+
   const baseRotation = getBaseRotation(activeCursor);
 
   return (
     <div
       className="fixed top-0 left-0 z-[9999] pointer-events-none"
       style={{
-        transform: `translate(${mousePos.x}px, ${mousePos.y}px) translate(-50%, -50%) rotate(${cursorAngle + baseRotation}deg)`,
+        transform: `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) rotate(${angle + baseRotation}deg)`,
         willChange: 'transform'
       }}
     >
