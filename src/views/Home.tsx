@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import HeroSection from '../features/home/HeroSection';
 import PlanSection from '../features/home/PlanSection';
-import { Play, X, Star, Sparkle, ArrowUpRight } from '@phosphor-icons/react';
-import { Link } from 'react-router-dom';
+import { Play, X, Star, Sparkle } from '@phosphor-icons/react';
 
 export default function Home() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);

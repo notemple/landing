@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   CalendarBlank,
@@ -7,10 +7,7 @@ import {
   List,
   Image as ImageIcon,
   MagnifyingGlass,
-  Sun,
-  Clipboard,
   Tag,
-  Trash,
 } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 
@@ -22,35 +19,12 @@ interface Task {
 }
 
 export default function PlanSection() {
-  // Calendar Interactivity State
-  const [selectedDay, setSelectedDay] = useState<number>(13);
-  const daysInWeek = [
-    { num: 11, label: 'Thu' },
-    { num: 12, label: 'Fri' },
-    { num: 13, label: 'Sat', isToday: true },
-    { num: 14, label: 'Sun' },
-    { num: 15, label: 'Mon' },
-    { num: 16, label: 'Tue' },
-    { num: 17, label: 'Wed' },
-  ];
-
-  // Tasks Interactivity State
-  const [activeTab, setActiveTab] = useState<'today' | 'upcoming' | 'all'>('all');
+  const activeTab = 'all';
   const [tasks, setTasks] = useState<Task[]>([
     { id: '1', text: 'redesign the document banner', completed: false, tag: 'today' },
     { id: '2', text: 'clean the car', completed: true, tag: 'upcoming' },
     { id: '3', text: 'ride 10km bicycle', completed: false, tag: 'upcoming' },
   ]);
-  const [newTaskText, setNewTaskText] = useState('');
-  const [showAddTask, setShowAddTask] = useState(false);
-
-  // Journal State
-  const [journalText, setJournalText] = useState(
-    "This note isn't urgent. It's observational. Its job is to hold fragments of the day—architectural details, lines of dialogues from cafes, questions about database scaling."
-  );
-  const [journalPrompt, setJournalPrompt] = useState(
-    "Give me 10 questions based on the Math Notes o"
-  );
 
   // Daily Items checklist for Card 4 (Calendar card design)
   const [dailyItems, setDailyItems] = useState([
@@ -59,51 +33,12 @@ export default function PlanSection() {
     { id: 'di3', text: 'Binary Tree', completed: false },
   ]);
 
-  // Reminders State
-  const [reminders, setReminders] = useState([
-    { time: '12:30', text: 'Zoom with Lena: final trip details' },
-    { time: '17:10', text: 'Check this Templ landing page preview' },
-  ]);
-  const [newReminderTime, setNewReminderTime] = useState('');
-  const [newReminderText, setNewReminderText] = useState('');
-  const [showAddReminder, setShowAddReminder] = useState(false);
-
   // Task Handlers
   const toggleTask = (id: string) => {
     setTasks(tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t));
   };
 
-  const handleAddTask = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newTaskText.trim()) return;
-    const newTask: Task = {
-      id: Date.now().toString(),
-      text: newTaskText.trim(),
-      completed: false,
-      tag: activeTab === 'all' ? 'today' : activeTab
-    };
-    setTasks([...tasks, newTask]);
-    setNewTaskText('');
-    setShowAddTask(false);
-  };
-
-  const deleteTask = (id: string) => {
-    setTasks(tasks.filter(t => t.id !== id));
-  };
-
-  // Reminder Handlers
-  const handleAddReminder = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newReminderText.trim() || !newReminderTime.trim()) return;
-    setReminders([...reminders, { time: newReminderTime, text: newReminderText.trim() }]);
-    setNewReminderText('');
-    setNewReminderTime('');
-    setShowAddReminder(false);
-  };
-
-  const deleteReminder = (index: number) => {
-    setReminders(reminders.filter((_, i) => i !== index));
-  }; return (
+  return (
     <section id="plan-section" className="py-24 px-4 sm:px-6 lg:px-8 border-b border-zinc-200/60 bg-white">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 

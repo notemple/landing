@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { Check, Sparkle, Globe, ArrowUpRight } from '@phosphor-icons/react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Check, Sparkle, ArrowUpRight } from '@phosphor-icons/react';
 import PageHero from '../components/PageHero';
 
 interface PricingTier {

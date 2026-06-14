@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { useTheme } from './ThemeContext';
 import {
   HardDrive
 } from '@phosphor-icons/react';
@@ -11,7 +10,6 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const { theme } = useTheme();
   const location = useLocation();
   const [scrollY, setScrollY] = React.useState(0);
 

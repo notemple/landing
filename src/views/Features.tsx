@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
 import {
   Keyboard,
   Sparkle,
   CloudArrowUp,
   TextT,
   Browsers,
-  BookOpen,
-  ArrowRight
+  BookOpen
 } from '@phosphor-icons/react';
-import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 
 interface FeatureItem {
